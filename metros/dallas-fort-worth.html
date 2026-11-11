@@ -35,6 +35,13 @@
   .sub{color:var(--slate);max-width:680px;margin-bottom:22px}
   .trades{display:flex;gap:10px;flex-wrap:wrap}
   .chip{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:9px 16px;font-weight:650;font-size:15px}
+  .svctabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;-webkit-overflow-scrolling:touch}
+  .svctab{flex:0 0 auto;border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:9px 15px;font-size:13.5px;font-weight:800;cursor:pointer;white-space:nowrap;font-family:inherit}
+  .svctab.active{border-color:var(--amber);background:#fff7ed}
+  .svcpanel{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:4px 16px 8px;margin-top:6px}
+  .svc-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-top:1px solid var(--line);font-size:15px}
+  .svc-row:first-child{border-top:none}
+  .livepill{font-size:10.5px;font-weight:700;color:var(--good);border:1px solid var(--good);border-radius:999px;padding:1px 7px;white-space:nowrap}
   .price-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;max-width:900px}
   .price-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px}
   .price-card.featured{border:2px solid var(--amber)}
@@ -91,31 +98,41 @@
   <div class="wrap">
     <h2>All skilled trades</h2>
     <p class="sub">If a permit signals your kind of work, we find it. In Fort Worth, Fence, Landscaping, Pool &amp; Spa, Gutters, and Blinds &amp; Window Treatments are live today, with more trades being added.</p>
-    <div class="trades">
-      <div class="chip">Fence</div>
-      <div class="chip">Landscaping</div>
-      <div class="chip">Pool &amp; Spa</div>
-      <div class="chip">Gutters</div>
-      <div class="chip">Blinds &amp; Window Treatments</div>
-      <div class="chip">Electrical</div>
-      <div class="chip">Plumbing</div>
-      <div class="chip">HVAC</div>
-      <div class="chip">Roofing</div>
-      <div class="chip">Solar</div>
-      <div class="chip">Concrete &amp; Masonry</div>
-      <div class="chip">Framing &amp; Carpentry</div>
-      <div class="chip">General Contracting</div>
-      <div class="chip">Painting</div>
-      <div class="chip">Drywall</div>
-      <div class="chip">Flooring</div>
-      <div class="chip">Siding</div>
-      <div class="chip">Windows &amp; Doors</div>
-      <div class="chip">Garage Doors</div>
-      <div class="chip">Irrigation</div>
-      <div class="chip">Tree Service</div>
-      <div class="chip">Foundation</div>
-      <div class="chip">Demolition</div>
-      <div class="chip">Kitchen &amp; Bath Remodeling</div>
+    <div class="svctabs">
+      <button class="svctab active" data-panel="svcp0">Structural &amp; Remodeling</button>
+      <button class="svctab" data-panel="svcp1">Core Systems &amp; Utilities</button>
+      <button class="svctab" data-panel="svcp2">Exterior &amp; Building Envelope</button>
+      <button class="svctab" data-panel="svcp3">Yard &amp; Property Site</button>
+    </div>
+    <div class="svcpanel" id="svcp0">
+      <div class="svc-row"><span>Demolition</span></div>
+      <div class="svc-row"><span>Drywall</span></div>
+      <div class="svc-row"><span>Foundation</span></div>
+      <div class="svc-row"><span>Framing &amp; Carpentry</span></div>
+      <div class="svc-row"><span>General Contracting</span></div>
+      <div class="svc-row"><span>Kitchen &amp; Bath Remodeling</span></div>
+    </div>
+    <div class="svcpanel" id="svcp1" style="display:none">
+      <div class="svc-row"><span>Electrical</span></div>
+      <div class="svc-row"><span>HVAC</span></div>
+      <div class="svc-row"><span>Irrigation</span></div>
+      <div class="svc-row"><span>Plumbing</span></div>
+      <div class="svc-row"><span>Solar</span></div>
+    </div>
+    <div class="svcpanel" id="svcp2" style="display:none">
+      <div class="svc-row"><span>Blinds &amp; Window Treatments</span> <span class="livepill">live now</span></div>
+      <div class="svc-row"><span>Concrete &amp; Masonry</span></div>
+      <div class="svc-row"><span>Garage Doors</span></div>
+      <div class="svc-row"><span>Gutters</span> <span class="livepill">live now</span></div>
+      <div class="svc-row"><span>Roofing</span></div>
+      <div class="svc-row"><span>Siding</span></div>
+      <div class="svc-row"><span>Windows &amp; Doors</span></div>
+    </div>
+    <div class="svcpanel" id="svcp3" style="display:none">
+      <div class="svc-row"><span>Fence</span> <span class="livepill">live now</span></div>
+      <div class="svc-row"><span>Landscaping</span> <span class="livepill">live now</span></div>
+      <div class="svc-row"><span>Pool &amp; Spa</span> <span class="livepill">live now</span></div>
+      <div class="svc-row"><span>Tree Service</span></div>
     </div>
   </div>
 </section>
@@ -162,5 +179,8 @@
     <div><a href="../index.html">Home</a> · <a href="../index.html#coverage">All 75 metros</a> · Questions? <a href="mailto:join@permitlocalpro.com">join@permitlocalpro.com</a></div>
   </div>
 </footer>
+<script>
+document.querySelectorAll('.svctab').forEach(function(b){b.addEventListener('click',function(){document.querySelectorAll('.svctab').forEach(function(x){x.classList.remove('active')});b.classList.add('active');document.querySelectorAll('.svcpanel').forEach(function(p){p.style.display='none'});document.getElementById(b.dataset.panel).style.display='block';});});
+</script>
 </body>
 </html>
