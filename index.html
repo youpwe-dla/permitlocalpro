@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PermitLocal — Building Permit Leads for Contractors | Live in Fort Worth, Enrolling 75 Metros</title>
+<meta name="description" content="PermitLocal reads every new building permit and emails contractors the ones that match their trade and ZIP codes. Live now in Fort Worth with a daily 6:30 AM digest; now enrolling the waitlist in the top 75 US metros.">
+<style>
+  :root{
+    --ink:#17202b; --slate:#43536a; --bg:#f7f8fa; --card:#ffffff;
+    --amber:#f59e0b; --amber-dark:#d97706; --line:#e3e8ef; --good:#0f766e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+  .wrap{max-width:1020px;margin:0 auto;padding:0 20px}
+  header{background:var(--ink);color:#fff}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0}
+  .logo{font-size:22px;font-weight:800;letter-spacing:.2px}
+  .logo span{color:var(--amber)}
+  .nav .tag{font-size:13px;color:#c7d0dd}
+  .hero{background:var(--ink);color:#fff;padding:34px 0 54px}
+  .hero h1{font-size:40px;line-height:1.15;font-weight:850;max-width:640px}
+  .hero h1 em{font-style:normal;color:var(--amber)}
+  .hero p{margin-top:16px;font-size:18px;color:#d5dce6;max-width:600px}
+  .cta-row{margin-top:26px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .btn{display:inline-block;background:var(--amber);color:#1c1300;font-weight:750;font-size:16px;padding:13px 24px;border-radius:10px;text-decoration:none}
+  .btn:hover{background:var(--amber-dark);color:#fff}
+  .cta-note{font-size:14px;color:#aeb9c8}
+  .stats{display:flex;gap:12px;flex-wrap:wrap;margin-top:36px}
+  .stat{background:#212d3d;border:1px solid #2e3d52;border-radius:12px;padding:14px 18px;min-width:150px}
+  .stat b{display:block;font-size:22px;color:#fff}
+  .stat span{font-size:13px;color:#aeb9c8}
+  section{padding:46px 0 8px}
+  h2{font-size:26px;font-weight:800;margin-bottom:8px}
+  .sub{color:var(--slate);max-width:640px;margin-bottom:22px}
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .card .n{display:inline-block;background:#fef3c7;color:#92400e;font-weight:800;font-size:13px;border-radius:999px;padding:3px 10px;margin-bottom:10px}
+  .card h3{font-size:17px;margin-bottom:6px}
+  .card p{color:var(--slate);font-size:15px}
+  .trades{display:flex;gap:10px;flex-wrap:wrap}
+  .chip{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:9px 16px;font-weight:650;font-size:15px}
+  .chip small{display:block;font-weight:400;color:var(--slate);font-size:12.5px}
+  .digest{background:#0f1722;color:#e6ecf3;border-radius:14px;padding:22px;font-size:14.5px}
+  .digest .d-head{color:#fff;font-weight:800;letter-spacing:.4px;font-size:13px;text-transform:uppercase;margin-bottom:4px}
+  .digest .d-sub{color:#9fb0c3;margin-bottom:14px;font-size:13.5px}
+  .lead{border-top:1px solid #263242;padding:11px 0}
+  .lead b{color:#fff}
+  .lead .val{color:var(--amber);font-weight:700}
+  .lead .meta{color:#9fb0c3;font-size:13px}
+  .sample{font-size:12px;color:#7d8ea3;margin-top:10px}
+  .price-card{background:var(--card);border:2px solid var(--amber);border-radius:16px;padding:26px;max-width:520px}
+  .price{font-size:42px;font-weight:850}
+  .price small{font-size:16px;color:var(--slate);font-weight:600}
+  .price-card ul{list-style:none;margin:14px 0 20px}
+  .price-card li{padding:5px 0;color:var(--slate)}
+  .price-card li::before{content:"✓ ";color:var(--good);font-weight:800}
+  .faq{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+  footer{margin-top:54px;background:var(--ink);color:#aeb9c8;padding:26px 0;font-size:13.5px}
+  footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  footer a{color:#d5dce6}
+  .price-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;max-width:900px}
+  .tier-name{font-weight:800;font-size:14px;text-transform:uppercase;letter-spacing:.5px;color:var(--slate)}
+  .guarantee{background:#ecfdf5;border:1px solid #a7f3d0;border-radius:12px;padding:16px 18px;margin-top:18px;max-width:900px;color:#065f46}
+  .scarcity{margin-top:12px;color:var(--slate);font-size:14.5px;max-width:900px}
+  .cov-region{margin-bottom:26px}
+  .cov-region h3{font-size:18px;margin-bottom:10px}
+  .metro-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px}
+  .metro-link{display:flex;justify-content:space-between;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:9px 13px;color:var(--ink);text-decoration:none;font-size:14.5px;font-weight:600}
+  .metro-link:hover{border-color:var(--amber)}
+  .metro-link.live{border:2px solid var(--good)}
+  .m-badge{font-size:11px;font-weight:800;border-radius:999px;padding:2px 8px;letter-spacing:.3px;text-transform:uppercase;white-space:nowrap}
+  .m-badge.live{background:#dcfce7;color:#166534}
+  .m-badge.wait{background:#fef3c7;color:#92400e}
+  @media (max-width:560px){.hero h1{font-size:31px}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="logo">Permit<span>Local</span></div>
+    <div class="tag">Live in Fort Worth · Enrolling 75 metros</div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <h1>See the job <em>before</em> your competitors do.</h1>
+    <p>PermitLocal reads every new building permit filed with the City of Fort Worth and emails you the ones that match <b>your trade</b> and <b>your ZIP codes</b> — homeowner name, address, and job value included. One digest, every morning.</p>
+    <div class="cta-row">
+      <a class="btn" href="mailto:join@permitlocalpro.com?subject=I%20want%20PermitLocal%20leads">Get started</a>
+      <span class="cta-note">$99/month Fresh · $39/month Delayed · 30-day money-back guarantee</span>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>2,200+</b><span>permits tracked and counting</span></div>
+      <div class="stat"><b>750+</b><span>filed in the last 7 days alone</span></div>
+      <div class="stat"><b>6:30 AM</b><span>digest in your inbox, daily</span></div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <h2>How it works</h2>
+    <p class="sub">A building permit is a signed announcement: this homeowner is about to spend money on a project. PermitLocal turns that public filing into your lead list.</p>
+    <div class="steps">
+      <div class="card"><span class="n">Step 1</span><h3>We pull the permits</h3><p>Every day we collect Fort Worth's newest building permits straight from the city's own data — the same morning they're filed.</p></div>
+      <div class="card"><span class="n">Step 2</span><h3>We match your work</h3><p>Tell us your trade and the ZIP codes you cover. We tag every permit — fence, pool, landscaping, gutters, blinds — and keep only your matches.</p></div>
+      <div class="card"><span class="n">Step 3</span><h3>You get the digest</h3><p>At 6:30 AM your matches land in one email: property address, homeowner name, type of work, and the job's value. Call first, win the job.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>All skilled trades</h2>
+    <p class="sub">Whatever your trade, if a permit signals your kind of work, we find it. In Fort Worth today, Fence, Landscaping, Pool &amp; Spa, Gutters, and Blinds &amp; Window Treatments are live, with more trades being added.</p>
+    <div class="trades">
+      <div class="chip">Fence</div>
+      <div class="chip">Landscaping</div>
+      <div class="chip">Pool &amp; Spa</div>
+      <div class="chip">Gutters</div>
+      <div class="chip">Blinds &amp; Window Treatments</div>
+      <div class="chip">Electrical</div>
+      <div class="chip">Plumbing</div>
+      <div class="chip">HVAC</div>
+      <div class="chip">Roofing</div>
+      <div class="chip">Solar</div>
+      <div class="chip">Concrete &amp; Masonry</div>
+      <div class="chip">Framing &amp; Carpentry</div>
+      <div class="chip">General Contracting</div>
+      <div class="chip">Painting</div>
+      <div class="chip">Drywall</div>
+      <div class="chip">Flooring</div>
+      <div class="chip">Siding</div>
+      <div class="chip">Windows &amp; Doors</div>
+      <div class="chip">Garage Doors</div>
+      <div class="chip">Irrigation</div>
+      <div class="chip">Tree Service</div>
+      <div class="chip">Foundation</div>
+      <div class="chip">Demolition</div>
+      <div class="chip">Kitchen &amp; Bath Remodeling</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>What lands in your inbox</h2>
+    <p class="sub">Every morning digest looks like this — your matches only, no noise.</p>
+    <div class="digest">
+      <div class="d-head">PermitLocal · Fort Worth</div>
+      <div class="d-sub">Your new leads for today</div>
+      <div class="lead"><b>1304 Belle Pl</b> · <span class="val">$35,000</span><div class="meta">In-ground pool · ZIP 76107 · Homeowner: S. Fullenwider</div></div>
+      <div class="lead"><b>New fence permit</b> · <span class="val">$8,500</span><div class="meta">Residential fence · ZIP 76133 · Homeowner name &amp; full address included</div></div>
+      <div class="lead"><b>Landscaping permit</b> · <span class="val">$12,000</span><div class="meta">Irrigation &amp; yard work · ZIP 76244 · Filed yesterday</div></div>
+      <div class="sample">First entry is a real Fort Worth permit; entries may vary by trade and ZIP.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Simple pricing</h2>
+    <p class="sub">One closed job pays for months of leads. Two ways in: fresh leads the same morning they're filed, or the same leads two weeks later for less.</p>
+    <div class="price-grid">
+      <div class="price-card featured">
+        <div class="tier-name">Fresh — same-morning leads</div>
+        <div class="price">$99<small>/month</small></div>
+        <ul>
+          <li>Daily 6:30 AM email digest of your matches</li>
+          <li>Leads the same morning permits are filed</li>
+          <li>Your trade + all the ZIP codes you cover</li>
+          <li>Homeowner name, address &amp; job value on every lead</li>
+          <li>🔥 Hot-lead flags on high-value, fresh permits</li>
+          <li>Dashboard access + CSV export of your leads</li>
+          <li>Month-to-month — no long-term contract</li>
+        </ul>
+        <a class="btn" href="mailto:join@permitlocalpro.com?subject=I%20want%20PermitLocal%20leads">Get started</a>
+      </div>
+      <div class="price-card">
+        <div class="tier-name">Delayed — 14-day leads</div>
+        <div class="price">$39<small>/month</small></div>
+        <ul>
+          <li>Weekly email digest of your matches</li>
+          <li>Leads delivered 14 days after filing</li>
+          <li>Your trade + all the ZIP codes you cover</li>
+          <li>Homeowner name, address &amp; job value on every lead</li>
+          <li>Dashboard access + CSV export of your leads</li>
+          <li>Month-to-month — no long-term contract</li>
+        </ul>
+        <a class="btn" href="mailto:join@permitlocalpro.com?subject=I%20want%20PermitLocal%20leads">Get started</a>
+      </div>
+    </div>
+    <div class="guarantee"><b>30-day money-back guarantee:</b> if you don't get leads you can use in your first 30 days, email us for a full refund — no forms, no hassle.</div>
+    <p class="scarcity"><b>Limited enrollment:</b> Limited to 20 subscriptions per trade, per metro — when a trade fills in a city, enrollment closes. A lead shared with everyone is worth nothing; we keep the list small on purpose.</p>
+  </div>
+</section>
+
+<section id="coverage">
+  <div class="wrap">
+    <h2>Coverage — 75 metros</h2>
+    <p class="sub">PermitLocal is <b>live today in Fort Worth</b> (Dallas–Fort Worth). Everywhere else, we're enrolling the waitlist now and launching metro by metro — waitlist members get first access and first claim on the 20 seats per trade. Find your metro:</p>
+      <div class="cov-region"><h3>Northeast</h3><div class="metro-grid">
+        <a class="metro-link" href="metros/new-york.html">New York, NY <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/philadelphia.html">Philadelphia, PA <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/boston.html">Boston, MA <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/pittsburgh.html">Pittsburgh, PA <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/providence.html">Providence, RI <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/hartford.html">Hartford, CT <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/buffalo.html">Buffalo, NY <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/rochester.html">Rochester, NY <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/albany.html">Albany, NY <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/worcester.html">Worcester, MA <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/allentown.html">Allentown, PA <span class="m-badge wait">Waitlist</span></a>
+      </div></div>
+      <div class="cov-region"><h3>South</h3><div class="metro-grid">
+        <a class="metro-link live" href="metros/dallas-fort-worth.html">Dallas–Fort Worth (Fort Worth), TX <span class="m-badge live">LIVE</span></a>
+<a class="metro-link" href="metros/houston.html">Houston, TX <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/washington-dc.html">Washington DC, DC <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/atlanta.html">Atlanta, GA <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/miami.html">Miami, FL <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/tampa.html">Tampa, FL <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/baltimore.html">Baltimore, MD <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/charlotte.html">Charlotte, NC <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/orlando.html">Orlando, FL <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/san-antonio.html">San Antonio, TX <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/austin.html">Austin, TX <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/nashville.html">Nashville, TN <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/virginia-beach.html">Virginia Beach, VA <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/jacksonville.html">Jacksonville, FL <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/oklahoma-city.html">Oklahoma City, OK <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/raleigh.html">Raleigh, NC <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/memphis.html">Memphis, TN <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/richmond.html">Richmond, VA <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/louisville.html">Louisville, KY <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/new-orleans.html">New Orleans, LA <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/birmingham.html">Birmingham, AL <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/tulsa.html">Tulsa, OK <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/knoxville.html">Knoxville, TN <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/mcallen.html">McAllen, TX <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/el-paso.html">El Paso, TX <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/columbia.html">Columbia, SC <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/baton-rouge.html">Baton Rouge, LA <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/greenville.html">Greenville, SC <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/little-rock.html">Little Rock, AR <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/charleston.html">Charleston, SC <span class="m-badge wait">Waitlist</span></a>
+      </div></div>
+      <div class="cov-region"><h3>Midwest</h3><div class="metro-grid">
+        <a class="metro-link" href="metros/chicago.html">Chicago, IL <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/detroit.html">Detroit, MI <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/minneapolis-st-paul.html">Minneapolis–St. Paul, MN <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/st-louis.html">St. Louis, MO <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/cincinnati.html">Cincinnati, OH <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/kansas-city.html">Kansas City, MO <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/columbus.html">Columbus, OH <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/cleveland.html">Cleveland, OH <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/indianapolis.html">Indianapolis, IN <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/milwaukee.html">Milwaukee, WI <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/grand-rapids.html">Grand Rapids, MI <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/dayton.html">Dayton, OH <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/omaha.html">Omaha, NE <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/wichita.html">Wichita, KS <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/akron.html">Akron, OH <span class="m-badge wait">Waitlist</span></a>
+      </div></div>
+      <div class="cov-region"><h3>West</h3><div class="metro-grid">
+        <a class="metro-link" href="metros/los-angeles.html">Los Angeles, CA <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/phoenix.html">Phoenix, AZ <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/san-francisco.html">San Francisco, CA <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/riverside-san-bernardino.html">Riverside–San Bernardino, CA <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/seattle.html">Seattle, WA <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/san-diego.html">San Diego, CA <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/denver.html">Denver, CO <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/portland.html">Portland, OR <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/sacramento.html">Sacramento, CA <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/las-vegas.html">Las Vegas, NV <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/san-jose.html">San Jose, CA <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/salt-lake-city.html">Salt Lake City, UT <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/tucson.html">Tucson, AZ <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/fresno.html">Fresno, CA <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/albuquerque.html">Albuquerque, NM <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/bakersfield.html">Bakersfield, CA <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/stockton.html">Stockton, CA <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/boise.html">Boise, ID <span class="m-badge wait">Waitlist</span></a>
+<a class="metro-link" href="metros/colorado-springs.html">Colorado Springs, CO <span class="m-badge wait">Waitlist</span></a>
+      </div></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Questions</h2>
+    <div class="faq">
+      <div class="card"><h3>Which areas are covered?</h3><p><b>Live today: Fort Worth</b> (Dallas–Fort Worth) — every permit the city publishes, across all Fort Worth ZIP codes. We're enrolling the waitlist in the <a href="#coverage">top 75 US metros</a> and launching city by city; join your metro's waitlist and we'll email you the moment it's live. We never charge a waitlist metro until it's actually live.</p></div>
+      <div class="card"><h3>Where does the data come from?</h3><p>The City of Fort Worth's official published permit data, refreshed daily. These are public filings — real projects, real homeowners.</p></div>
+      <div class="card"><h3>How do I sign up?</h3><p>Email us at <a href="mailto:join@permitlocalpro.com">join@permitlocalpro.com</a> with your trade and ZIP codes and we'll set up your digest. Billing is a simple subscription: $99/month for Fresh leads or $39/month for Delayed leads, with a 30-day money-back guarantee.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>© 2026 PermitLocal · permitlocalpro.com</div>
+    <div>Questions? <a href="mailto:join@permitlocalpro.com">join@permitlocalpro.com</a></div>
+  </div>
+</footer>
+
+</body>
+</html>
