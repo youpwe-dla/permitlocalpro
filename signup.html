@@ -131,11 +131,11 @@
       </div>
 
       <button class="btn" id="submitBtn" type="button">Sign me up</button>
-      <p class="fineprint">Pressing the button opens your email app with your signup filled in — just press Send. That's how your signup reaches us; we reply from join@permitlocalpro.com to finish setting up your account.</p>
+      <p class="fineprint">Pressing the button sends your signup straight to us — no email app needed. We reply from join@permitlocalpro.com to finish setting up your account.</p>
     </div>
 
     <div class="done" id="doneBox" style="display:none">
-      <b>Almost done!</b> Your email app should have opened with your signup addressed to join@permitlocalpro.com — press <b>Send</b> there and we take it from there. Didn't open? Email us the same details at <a href="mailto:join@permitlocalpro.com">join@permitlocalpro.com</a>.
+      <b>You're in!</b> Your signup is on its way to us — we'll reply from join@permitlocalpro.com to finish setting up your account. No reply after a day? Email us at <a href="mailto:join@permitlocalpro.com">join@permitlocalpro.com</a>.
     </div>
   </div>
 </main>
@@ -149,7 +149,7 @@
 // Signup submit: today this composes a structured email to join@ (no backend on a
 // static site). To switch to silent form posts later, set FORM_ENDPOINT to the
 // form-service URL and submissions will POST there instead — no other change needed.
-var FORM_ENDPOINT = "";
+var FORM_ENDPOINT = "https://api.web3forms.com/submit";
 var LIVE_METROS = ["Dallas–Fort Worth", "Austin"];
 var qs = new URLSearchParams(location.search);
 
@@ -220,7 +220,7 @@ document.getElementById('submitBtn').addEventListener('click', function(){
 
   if (FORM_ENDPOINT){
     fetch(FORM_ENDPOINT, {method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({subject: subject, message: lines.join('\n')})})
+      body: JSON.stringify({access_key: 'fb618522-3dfa-45ff-81d9-cb647ffc21d1', subject: subject, from_name: 'PermitLocal Signup', message: lines.join('\n')})})
       .catch(function(){});
   } else {
     window.location.href = 'mailto:join@permitlocalpro.com?subject=' +
